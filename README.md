@@ -7,7 +7,7 @@
 
 
 <h1>How To use</h1>
-=> You need to install youtube-dl, flask, and pafy on your local machine.
-=> Run the server.py and you can search, stream and download youtube videos. 
-=> The system prevents unwanted ads from disturbing your online experience.
-=> The api is structured to make it possible for implementing on any program.
+=> You need to install youtube-dl, flask, and pafy on your local machine.</br>
+=> Run the server.py and you can search, stream and download youtube videos. </br>
+=> The system prevents unwanted ads from disturbing your online experience.</br>
+=> The api is structured to make it possible for implementing on any program.</br>
