@@ -1,9 +1,9 @@
 '''
 Author: Bereket Siraw
-Date: 03/25/2021 GC.
-Updated: 8/6/2021 
+Date: 03/25/2021 GC
+Updated: 8/6/2021 GC
 newFeature: adding mulit-threading concept to reduce time complexity
-Purpose: It's aim is to serve mimic and fetch data from youtube without the use of api
+Purpose: It aims to fetch data from youtube without the use of api and remove unwanted ads.
 '''
 from concurrent.futures import ThreadPoolExecutor,ProcessPoolExecutor
 from waitress import serve
@@ -21,8 +21,8 @@ CORS(app)
 class youtubeHundler:
     def __init__(self, keyword):
         self.keyword = keyword
-        self.limit = 10 #no limit
-        self.timeout = 10 # 10sec
+        self.limit = 10 
+        self.timeout = 10 
 
     def encode(self, val):
         return str(val).replace(" ", "+")
@@ -35,7 +35,7 @@ class youtubeHundler:
         return req.content.decode()
 
 
-    def leak_yt_url(self, video_id, caption="notSet"):
+    def get_url(self, video_id, caption="notSet"):
         download_url = None
         if len(video_id)==0:
             return [download_url, video_id, caption]
@@ -49,8 +49,6 @@ class youtubeHundler:
             video = pafy.new("https://youtu.be/{}".format(video_id))
             best = video.getbest()
             download_url = best.url
-            # except Exception as e:
-            #     print("Error:) on line 47 "+str(e))
         return [download_url, video_id]
 
     def searchin(self):
@@ -60,14 +58,11 @@ class youtubeHundler:
         encode_keyword = self.encode(self.keyword)
         html = self.request_hundler(encode_keyword)
         video = re.findall(r"videoId\":\"(\S{11})", html)
-        video = list(set(video))  # dublicate removed
-        # txt = re.findall(r"\"ownerText\":{\"runs\":\[{\"text\":\"(\S{20})", html) 
-        # txt = list(set(txt))
+        video = list(set(video)) 
         video = video[:self.limit]
-        # txt = txt[:self.limit]
 
         with ThreadPoolExecutor(max_workers=100) as excutor: 
-            his = excutor.map(self.leak_yt_url, video)
+            his = excutor.map(self.get_url, video)
             obj = {"inf":[{"txt":ret} for ret in his]}
 
             if hasattr(obj, 'inf'):
@@ -75,13 +70,6 @@ class youtubeHundler:
                     print("Ohoo testy ha:) ")
                     return searchin(keyword)
             return obj
-
-
-# MSSQLSERVER
-# typewriter
-#port number to communicate with master node 8391
-#master nodee https://bereket-siraw:8391
-# controller name: bereket
 
 @app.route('/')
 def home():
