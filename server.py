@@ -66,7 +66,7 @@ class youtubeHundler:
 
             if hasattr(obj, 'inf'):
                 if len(obj.inf) == 0 and "Result is not found" not in html:
-                    print("Ohoo testy ha:) ")
+                    print("Result is found!")
                     return searchin(keyword)
             return obj
 
