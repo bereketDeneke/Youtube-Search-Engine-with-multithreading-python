@@ -8,14 +8,12 @@ from concurrent.futures import ThreadPoolExecutor,ProcessPoolExecutor
 from waitress import serve
 from flask import Flask
 from flask import render_template, request, redirect, make_response
-from flask_cors import CORS
 import requests
 import re
 import pafy
 from time import sleep, perf_counter
 
 app = Flask(__name__)
-CORS(app)
 
 class youtubeHundler:
     def __init__(self, keyword):
