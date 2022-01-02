@@ -2,7 +2,6 @@
 Author: Bereket Siraw
 Date: 03/25/2021 GC
 Updated: 8/6/2021 GC
-newFeature: adding mulit-threading concept to reduce time complexity
 Purpose: It aims to fetch data from youtube without the use of api and remove unwanted ads.
 '''
 from concurrent.futures import ThreadPoolExecutor,ProcessPoolExecutor
